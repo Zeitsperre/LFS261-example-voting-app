@@ -1,13 +1,16 @@
 pipeline { 
 
-    agent {
-      docker {
-        image 'node:18'
-      }
-    }
+    agent none
 
     stages{ 
+        
         stage('build'){ 
+          agent {
+            docker {
+              image 'node:18'
+            }
+          }
+
           when{
             changeset "**/result/**"
           }
@@ -19,7 +22,14 @@ pipeline {
             } 
           } 
         } 
+    
         stage('test'){ 
+          agent {
+            docker {
+              image 'node:18'
+            } 
+          } 
+          
           when{
             changeset "**/result/**"
           }
