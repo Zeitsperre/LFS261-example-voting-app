@@ -3,6 +3,7 @@ pipeline {
   agent none
 
   stages{
+
       stage("build"){
         when{
           changeset "**/worker/**"
@@ -75,6 +76,7 @@ pipeline {
             }
          }
       }
+
   }
 
   post{
