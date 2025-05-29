@@ -22,7 +22,7 @@ pipeline {
       }
     }
 
-    stage('worker test') {
+    stage('worker-test') {
       agent {
         docker {
           image 'maven:3.9.8-sapmachine-21'
@@ -172,7 +172,7 @@ pipeline {
       }
     }
 
-    stage('vote integration'){ 
+    stage('vote-integration'){ 
       agent any 
       when { 
         changeset "**/vote/**" 

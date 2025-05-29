@@ -2,11 +2,9 @@ pipeline {
     agent none
     stages{ 
         stage('build'){ 
-
             when{
                 changeset "**/vote/**"
             }
-
             agent{
                 docker{
                     image 'python:3.11-slim'
@@ -21,11 +19,9 @@ pipeline {
             } 
         } 
         stage('test'){ 
-
             when{
                 changeset "**/vote/**"
             }
-
             agent {
                 docker{
                     image 'python:3.9-slim'
@@ -48,7 +44,6 @@ pipeline {
             changeset "**/vote/**"
             branch 'master'
           }
-       
           steps{
             echo 'Packaging vote app with docker'
             script{
@@ -68,7 +63,6 @@ pipeline {
             echo 'Pipeline for vote is complete'
         }
     }
-
 } 
 
 
