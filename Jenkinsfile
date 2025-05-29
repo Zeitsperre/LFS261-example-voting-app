@@ -71,8 +71,9 @@ pipeline {
         script {
           docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
             def workerImage = docker.build("trevorjsmith/worker:v${env.BUILD_ID}", './worker')
+            def safeBranchName = env.BRANCH_NAME.replaceAll('/', '-')
             workerImage.push()
-            workerImage.push("${env.BRANCH_NAME}")
+            workerImage.push(safeBranchName)
             workerImage.push('latest')
           }
         }
@@ -125,8 +126,9 @@ pipeline {
         script {
           docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
             def resultImage = docker.build("trevorjsmith/result:v${env.BUILD_ID}", './result')
+            def safeBranchName = env.BRANCH_NAME.replaceAll('/', '-')
             resultImage.push()
-            resultImage.push("${env.BRANCH_NAME}")
+            resultImage.push(safeBranchName)
             resultImage.push('latest')
           }
         }
@@ -192,8 +194,9 @@ pipeline {
           docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
             // ./vote is the path to the Dockerfile that Jenkins will find from the Github repo
             def voteImage = docker.build("trevorjsmith/vote:${env.GIT_COMMIT}", "./vote")
+            def safeBranchName = env.BRANCH_NAME.replaceAll('/', '-')
             voteImage.push()
-            voteImage.push("${env.BRANCH_NAME}")
+            voteImage.push(safeBranchName)
             voteImage.push("latest")
           }
         }
